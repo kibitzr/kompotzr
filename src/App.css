@@ -22,6 +22,17 @@
   font-size: large;
 }
 
+.config-code {
+  font-family: "Consolas, monospace";
+  width: 80%;
+  background-color: black;
+  color: white;
+  text-align: left;
+  margin: 20px auto;
+  padding: 20px;
+  white-space: pre;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
