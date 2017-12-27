@@ -1,7 +1,5 @@
-.App {
-  text-align: left;
+body {
   background-color: #fdf6e3;
-  padding: 0px 2em;
 }
 
 .App-header {
@@ -17,7 +15,18 @@
 }
 
 .App-intro {
-  font-size: large;
+  /*font-size: large;*/
+  max-width: 60em;
+  margin: 1em auto;
+}
+
+.App-body {
+  border-top: 1px solid #073642;
+  text-align: left;
+  background-color: #fdf6e3;
+  padding: 1em 0em;
+  max-width: 60em;
+  margin: 1em auto;
 }
 
 .yaml-wrapper {
@@ -31,10 +40,18 @@
   background-color: #002b36;
   color: #93a1a1;
   margin: 12px auto;
+  /*max-width: 60em;*/
   text-align: left;
   padding: 20px;
   white-space: pre-wrap;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -webkit-appearance: none;
+  border:0;
+  outline:0;
 }
+
+
 
 /*
 Solarized pallete:

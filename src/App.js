@@ -22,14 +22,16 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">Kompotzr</h1>
         </header>
-        <p className="App-intro">
+        <div className="App-intro">
           Browser interface for composing Kibitzr configuration.
-        </p>
-        <WizUrl
-          handleUrl={(url) => this.handleUrl(url)} />
-        <WizTransform
-          handleTransforms={(transforms) => this.handleTransforms(transforms)} />
-        {this.renderConfig()}
+        </div>
+        <div className="App-body">
+          <WizUrl
+            handleUrl={(url) => this.handleUrl(url)} />
+          <WizTransform
+            handleTransforms={(transforms) => this.handleTransforms(transforms)} />
+          {this.renderConfig()}
+        </div>
       </div>
     );
   }

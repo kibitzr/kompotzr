@@ -9,8 +9,8 @@ input, select, button {
   background-color: #eee8d5;
   color: #586e75;
   padding: 12px;
-  margin: 0px 12px;
-  width:auto;
+  margin: 0px 12px 0px 0px;
+  width: auto;
   font-size: 12pt;
   text-align: left;
   border-radius: 5px;
@@ -28,14 +28,6 @@ input, select, button {
 button {
     font-weight: bold;
     background-color: #93a1a1;
-}
-
-.yaml {
-  border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -webkit-appearance: none;
-  border:0;
-  outline:0;
 }
 
 #blue {
