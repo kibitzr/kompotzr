@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import WizUrl from './WizUrl';
 import WizTransform from './WizTransform';
+import _ from 'underscore';
 
 
 class App extends Component {
@@ -39,30 +40,38 @@ class App extends Component {
     this.setState({transforms: transforms});
   }
   
-  config_content() {
-    const config = this.state;
-    const transforms = config.transforms.map((data, idx) => {
-      if (data.argument !== null) {
-        return '      - ' + data.transform + ': ' + data.argument + '\n';
-      } else {
-        return '      - ' + data.transform + '\n';
-      }
-    })
-    const text = `checks:
-  - url: ` + config.url + `
-    transform:
-` + transforms + `
-`;
-    return { __html: text };
-  }
-
   renderConfig() {
     return <p 
       className="config-code"
       style={{ whiteSpace: 'pre-wrap' }} 
-      dangerouslySetInnerHTML={ this.config_content() } 
+      dangerouslySetInnerHTML={ render_yaml(this.state) } 
     />
   }
+}
+
+// https://github.com/addyosmani/backbone-fundamentals/issues/364
+_.templateSettings = {
+  evaluate: /{{\s+(.+?)\s+}}/g,
+  interpolate: /{{=(.+?)}}/g,
+  escape: /{{-(.+?)}}/g
+};
+const yaml_template = _.template(`checks:
+  - url: {{= url }}
+{{ if (transforms.length > 0) {
+}}    transforms:{{
+    _.each(transforms, function(t) { }}
+      - {{= t.transform }}{{
+        if (t.argument) {
+          }}: {{= t.argument }}{{
+        }; }}{{
+    }); }}{{
+} }}
+`);
+
+function render_yaml(config) {
+  return {
+    __html: yaml_template(config)
+  };
 }
 
 export default App;

@@ -1,4 +1,65 @@
 import React, { Component } from 'react';
+import _ from 'underscore';
+
+
+const TRANSFORMERS = [
+    {
+        slug: "tag",
+        title: "Crop to HTML tag",
+        placeholder: "tagname",
+    },
+    {
+        slug: "css",
+        title: "Crop to CSS Selector",
+        placeholder: "selector",
+    },
+    {
+        slug: "css-all",
+        title: "Crop to all matching CSS Selectors",
+        placeholder: "selector",
+    },
+    {
+        slug: "xpath",
+        title: "Crop to XPATH",
+        placeholder: "path",
+    },
+    {
+        slug: "changes",
+        title: "Replace with changes to previous",
+        placeholder: "type",
+    },
+    {
+        slug: "python",
+        title: "Python script",
+        placeholder: "code",
+    },
+    {
+        slug: "bash",
+        title: "Bash script",
+        placeholder: "code",
+    },
+    {
+        slug: "jinja",
+        title: "Jinja2 template",
+        placeholder: "template",
+    },
+    {
+        slug: "jq",
+        title: "Execute jq",
+        placeholder: "template",
+    },
+    {
+        slug: "text",
+        title: "Strip down HTML markup",
+    },
+    {
+        slug: "json",
+        title: "Prettify JSON data",
+    },
+]
+const PLACEHOLDERS = _.object(_.map(TRANSFORMERS, (t) => {
+  return [t.slug, t.placeholder];
+}));
 
 
 class Transform extends Component {
@@ -33,23 +94,27 @@ class Transform extends Component {
     if (hasArgument(this.props.transform)) {
       argument = <input
         type="text"
+        placeholder={PLACEHOLDERS[this.props.transform]}
         onChange={this.handleArgumentChange}
         value={this.props.argument}
       />
     } else {
       argument = null
     }
+    const options = _.map(TRANSFORMERS, (t) => {
+      return (
+        <option value={t.slug}>{t.title}</option>
+      )
+    });
     return (
       <p>
         <select value={this.props.transform} onChange={this.handleTransformChange}>
-          <option value="text">Strip down HTML markup</option>
-          <option value="css">Crop HTML by CSS Selector</option>
+          {options}
         </select>
         {argument}
       </p>
     )
   }
-  
 }
 
 
@@ -61,18 +126,24 @@ class WizTransform extends Component {
         'argument': '#npm-expansions'
       }
       this.state = {
-          transforms: [default_transform],
+          transforms: [],  // default_transform],
           default_transform: default_transform,
       };
       this.handleChange = this.handleChange.bind(this);
-      this.props.handleTransforms(this.state.transforms);
+      this.handleTransforms(this.state.transforms);
   }
 
   handleChange(idx, data) {
     let transforms = this.state.transforms.slice();
     transforms[idx] = data;
     this.setState({transforms: transforms});
-    this.props.handleTransforms(this.clearTransforms(transforms));
+    this.handleTransforms(transforms);
+  }
+  
+  handleTransforms(transforms) {
+    return this.props.handleTransforms(
+      this.clearTransforms(transforms)
+    );
   }
   
   clearTransforms(transforms) {
@@ -87,7 +158,7 @@ class WizTransform extends Component {
   handleAdd() {
     const transforms = this.state.transforms.concat(this.state.default_transform)
     this.setState({transforms: transforms});
-    this.props.handleTransforms(transforms);
+    this.handleTransforms(transforms);
   }
 
   render() {
@@ -114,8 +185,8 @@ class WizTransform extends Component {
   }
 }
 
-function hasArgument(transform) {
-  if (transform === "css") {
+function hasArgument(slug) {
+  if (_.has(PLACEHOLDERS, slug) && PLACEHOLDERS[slug]) {
     return true;
   }
   return false;
