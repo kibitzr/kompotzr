@@ -12,8 +12,9 @@ class WizUrl extends Component {
   }
 
   handleChange(event) {
-    this.setState({value: event.target.value});
-    this.props.handleUrl(this.state.value);
+    const new_url = event.target.value;
+    this.setState({value: new_url});
+    this.props.handleUrl(new_url);
   }
 
   render() {

@@ -1,17 +1,15 @@
 .App {
   text-align: left;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+  background-color: #fdf6e3;
+  padding: 0px 2em;
 }
 
 .App-header {
-  background-color: #222;
+  text-align: center;
+  background-color: #002b36;
   height: 50px;
   padding: 10px;
-  color: white;
+  color: #93a1a1;
 }
 
 .App-title {
@@ -22,18 +20,30 @@
   font-size: large;
 }
 
-.config-code {
-  font-family: "Consolas, monospace";
-  width: 80%;
-  background-color: black;
-  color: white;
-  text-align: left;
-  margin: 20px auto;
-  padding: 20px;
-  white-space: pre;
+.yaml-wrapper {
+  /*padding: 20px;*/
+  margin: 12px auto;
+  /*width: 80%;*/
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.yaml {
+  font-family: "Consolas", "monospace";
+  background-color: #002b36;
+  color: #93a1a1;
+  margin: 12px auto;
+  text-align: left;
+  padding: 20px;
+  white-space: pre-wrap;
 }
+
+/*
+Solarized pallete:
+$base03:    #002b36;
+$base02:    #073642;
+$base01:    #586e75;
+$base00:    #657b83;
+$base0:     #839496;
+$base1:     #93a1a1;
+$base2:     #eee8d5;
+$base3:     #fdf6e3;
+*/
